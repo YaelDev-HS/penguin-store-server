@@ -1,0 +1,12 @@
+
+
+services:
+  penguin_db:
+    image: 'postgres:latest'
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=penguin-store
+      - POSTGRES_PASSWORD=penguin-store-password
+      - POSTGRES_DB=penguin-store-db
+
