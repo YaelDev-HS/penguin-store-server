@@ -3,6 +3,7 @@ package com.yael.penguin.store.penguin_store.domain.entities.users;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yael.penguin.store.penguin_store.application.dtos.auth.RegisterUserDto;
 import com.yael.penguin.store.penguin_store.domain.entities.EntityBase;
 import com.yael.penguin.store.penguin_store.domain.entities.auth.RoleEntity;
 
@@ -31,6 +32,11 @@ public class UserEntity extends EntityBase {
 
     // is required
     public UserEntity(){}
+
+    public UserEntity(RegisterUserDto dto, String passwordHash){
+        this.email = dto.getEmail();
+        this.password = passwordHash;
+    }
 
 
     public String getEmail() {
