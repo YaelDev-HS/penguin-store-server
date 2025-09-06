@@ -1,6 +1,8 @@
 package com.yael.penguin.store.penguin_store.application.services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.crypto.SecretKey;
@@ -11,7 +13,6 @@ import com.yael.penguin.store.penguin_store.application.dtos.auth.CustomUserAuth
 import com.yael.penguin.store.penguin_store.application.interfaces.IJwtService;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwe;
 import io.jsonwebtoken.Jwts;
 
 
@@ -62,12 +63,22 @@ public class JwtServiceImpl implements IJwtService {
     public CustomUserAuthDto decodeToken(String token) {
         try {
             Claims claims = getClaimsByToken(token);
-            CustomUserAuthDto auth = new CustomUserAuthDto();
 
             String email = claims.getSubject();
-            Long accountId = claims.get("accountId", )
+            Long accountId = claims.get("accountId", Long.class);
+            Object rolesObj = claims.get("roles");
+            List<String> roles = new ArrayList<>();
 
-            return auth;
+            if(rolesObj != null && rolesObj instanceof ArrayList){
+                ((List<?>) rolesObj)
+                    .forEach(r -> {
+                        if( r instanceof String ){
+                            roles.add((String) r);
+                        }
+                    });
+            }
+
+            return new CustomUserAuthDto(email, accountId, roles);
         } catch (Exception e) {
             return null;
         }
