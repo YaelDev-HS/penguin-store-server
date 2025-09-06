@@ -20,4 +20,9 @@ public class UserServiceImpl extends SharedServiceImpl<UserEntity, IUserReposito
         return repository.findByEmail(email);
     }
 
+    @Override
+    public <P> Optional<P> findByEmail(String email, Class<P> projection) {
+        return repository.findByEmail(email, projection);
+    }
+
 }

@@ -11,5 +11,6 @@ import com.yael.penguin.store.penguin_store.infrastructure.services.shared.IShar
 public interface IUserService extends ISharedService<UserEntity> {
 
     public Optional<Boolean> findUserByEmail(String email);
+    public <P> Optional<P> findByEmail(String email, Class<P> projection);
 
 }

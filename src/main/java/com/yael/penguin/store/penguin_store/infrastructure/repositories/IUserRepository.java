@@ -19,4 +19,6 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
     """)
     public Optional<Boolean> findByEmail(String email);
 
+    public <P> Optional<P> findByEmail(String email, Class<P> projection);
+
 }
