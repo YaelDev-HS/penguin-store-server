@@ -42,7 +42,7 @@ public class AuthUseCases {
         UserEntity user = new UserEntity(dto, passwordHash);
 
         user = userService.save(user);
-        return mapperToLogged(passwordHash, user.getRoles(), user.getId());
+        return mapperToLogged(user.getEmail(), user.getRoles(), user.getId());
     }
 
     public UserLoggedDto loginUser(LoginDto dto){
